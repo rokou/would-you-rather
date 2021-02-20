@@ -1,0 +1,39 @@
+.home {
+  text-align: center;
+}
+
+.question-list {
+  list-style: none;
+}
+
+.leaderboard {
+  text-align: leaderboard;
+}
+.leaderboard-list {
+  list-style: none;
+}
+button.question {
+  width: 300px;
+}
+
+.nav ul {
+  display: flex;
+  width: auto;
+  flex-direction: row;
+  justify-content: center;
+  text-decoration: none;
+  list-style: none;
+  margin: 10 10 10 10;
+}
+
+.nav li {
+  padding: 10px;
+  width: auto;
+  float: left;
+}
+
+.nav li:last-child {
+  position: relative;
+  float: right!important;
+  width: auto;
+}
