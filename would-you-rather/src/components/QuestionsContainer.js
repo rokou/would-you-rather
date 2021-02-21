@@ -13,10 +13,11 @@ class QuestionsContainer extends Component {
   filterAnswered = () => {
     let answered = []
     this.props.answeredQuestions.forEach(answeredQuestion => {
-    answered = answered.concat(this.props.questionsIDs.filter(questionid => {
+    answered.unshift(this.props.questionsIDs.filter(questionid => {
         return (answeredQuestion === questionid)
-      }))
+      })[0])
     })
+    console.log('answered', answered)
     return answered
   }
 
@@ -28,7 +29,8 @@ class QuestionsContainer extends Component {
         return false
       }
       return true
-    }))
+    })).reverse()
+    console.log('unanswered', unanswered)
    return unanswered
   }
 
