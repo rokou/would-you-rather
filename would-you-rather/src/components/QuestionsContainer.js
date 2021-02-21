@@ -3,8 +3,11 @@ import { connect } from 'react-redux'
 import Question from './Question'
 
 class QuestionsContainer extends Component {
-  state = {
-    showUnanswered: true
+  constructor(props){
+    super(props)
+    this.state = {
+      showUnanswered: true
+    }
   }
 
   filterAnswered = () => {
@@ -18,13 +21,15 @@ class QuestionsContainer extends Component {
   }
 
   filterUnanswered = () => {
+    const answered = this.filterAnswered()
     let unanswered = []
-    this.props.answeredQuestions.forEach(answeredQuestion => {
     unanswered = unanswered.concat(this.props.questionsIDs.filter(questionid => {
-        return (answeredQuestion !== questionid)
-      }))
-    })
-    return [...new Set(unanswered)]
+      if (answered.includes(questionid)) {
+        return false
+      }
+      return true
+    }))
+   return unanswered
   }
 
   handleClick = (e, button) => {
@@ -38,7 +43,6 @@ class QuestionsContainer extends Component {
         showUnanswered: true
       })
     }
-    console.log('showUnanswered', this.state.showUnanswered)
   }
 
   render () {
@@ -70,9 +74,7 @@ class QuestionsContainer extends Component {
 }
 
 function mapStateToProps ({ authedUser, questions, users }) {
-  const user = users[authedUser]
-  console.log('questions', questions)
-  console.log('users.answers', user.answers)
+  let user = users[authedUser]
   return {
     answeredQuestions : Object.keys(user.answers),
     questionsIDs : Object.keys(questions),
